@@ -16,11 +16,13 @@ struct DealGridView: View {
     ]
     
     @State var seeMore = false
+    @Binding var path: NavigationPath
+
     var body: some View {
         VStack {
             LazyVGrid(columns: columns) {
                 ForEach(seeMore == true ? deals : Array(deals.prefix(4))) { deal in
-                    NavigationLink(destination: DealDetailView(deal: deal)) {
+                    NavigationLink(value: deal) {
                         VStack {
                             AsyncImage(url: URL(string: deal.product.image)) {image in
                                 image

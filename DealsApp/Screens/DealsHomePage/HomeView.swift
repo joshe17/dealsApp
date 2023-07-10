@@ -9,9 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
-
+    @State private var path = NavigationPath()
+    
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             VStack {
                 ScrollView(showsIndicators: false) {
                     VStack {
@@ -31,7 +32,7 @@ struct HomeView: View {
                                 .padding(.horizontal, 30)
                                 .padding(.top)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            NavigationLink(destination: DealDetailView(deal: featured)) {
+                            NavigationLink(value: featured) {
                                 FeaturedDealView(deal: featured)
                             }
                         }
@@ -42,7 +43,7 @@ struct HomeView: View {
                             .padding(.top)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        DealGridView(deals: viewModel.deals)
+                        DealGridView(deals: viewModel.deals, path: $path)
                     }
                     .toolbarBackground(
                         Color("darkPurple"),
@@ -59,7 +60,11 @@ struct HomeView: View {
             }
             .background(Color("darkPurple"))
             .foregroundColor(.white)
+            .navigationDestination(for: Deal.self) { deal in
+                DealDetailView(deal: deal, path: $path)
+            }
         }
+
         .onAppear {
             viewModel.getDeals()
         }
