@@ -24,7 +24,11 @@ struct Deals: Codable {
 }
 
 
-struct Deal: Codable, Identifiable {
+struct Deal: Codable, Identifiable, Hashable {
+    static func == (lhs: Deal, rhs: Deal) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     let id: String
     let title: String
     let url: String
@@ -63,7 +67,7 @@ struct Deal: Codable, Identifiable {
     }
 }
 
-struct Product: Codable {
+struct Product: Codable, Hashable {
     let availability: String
     let image: String
     let description: String
@@ -79,7 +83,7 @@ struct Product: Codable {
     }
 }
 
-struct ProductLike: Codable, Identifiable {
+struct ProductLike: Codable, Identifiable, Hashable {
     let id: String
     let user: User
     
@@ -89,7 +93,7 @@ struct ProductLike: Codable, Identifiable {
     }
 }
 
-struct User: Codable, Identifiable {
+struct User: Codable, Identifiable, Hashable {
     let id: String
     let name: String
     let likes: [UserLike]
@@ -101,7 +105,7 @@ struct User: Codable, Identifiable {
     }
 }
 
-struct UserLike: Codable, Identifiable {
+struct UserLike: Codable, Identifiable, Hashable {
     let id: String
     let deal: AbbreviatedDeal
     
@@ -111,7 +115,7 @@ struct UserLike: Codable, Identifiable {
     }
 }
 
-struct AbbreviatedDeal: Codable, Identifiable {
+struct AbbreviatedDeal: Codable, Identifiable, Hashable {
     let id: String
     let title: String
     let url: String
@@ -129,7 +133,7 @@ struct AbbreviatedDeal: Codable, Identifiable {
     }
 }
 
-struct ProductDislike: Codable, Identifiable{
+struct ProductDislike: Codable, Identifiable, Hashable {
     let id: String
     let user: DislikeUser
     
@@ -139,7 +143,7 @@ struct ProductDislike: Codable, Identifiable{
     }
 }
 
-struct DislikeUser: Codable {
+struct DislikeUser: Codable, Hashable {
     let name: String
     
     private enum CodingKeys: String, CodingKey {
@@ -147,7 +151,7 @@ struct DislikeUser: Codable {
     }
 }
 
-struct Comment: Codable, Identifiable {
+struct Comment: Codable, Identifiable, Hashable {
     let id: String
     let createdAt: String
     let text: String
@@ -161,7 +165,7 @@ struct Comment: Codable, Identifiable {
     }
 }
 
-struct CommentUser: Codable, Identifiable {
+struct CommentUser: Codable, Identifiable, Hashable {
     let id: String
     let name: String
     
