@@ -28,7 +28,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func getMostPopularDeal() -> Deal? {
-        if let mostPopular = deals.max(by: { $0.likes.count < $1.likes.count }) {
+        if let mostPopular = deals.max(by: { $0.likes?.count ?? 0 < $1.likes?.count ?? 0 }) {
             return mostPopular
         } else {
             return nil

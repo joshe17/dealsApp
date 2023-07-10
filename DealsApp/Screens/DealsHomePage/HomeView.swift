@@ -44,6 +44,7 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         DealGridView(deals: viewModel.deals, path: $path)
+                            .padding()
                     }
                     .toolbarBackground(
                         Color("darkPurple"),

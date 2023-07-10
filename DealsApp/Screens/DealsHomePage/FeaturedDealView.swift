@@ -15,19 +15,21 @@ struct FeaturedDealView: View {
             Text(deal.title).font(.title3).bold()
                 .padding()
             Spacer()
-            AsyncImage(url: URL(string: deal.product.image)) {image in
-                image
-                    .resizable()
-                    .scaledToFill()
-            } placeholder: {
-                ProgressView()
+            if let imageLink = deal.product?.image {
+                AsyncImage(url: URL(string: imageLink)) {image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 200, height: 250)
+                .cornerRadius(20)
             }
-            .frame(width: 200, height: 250)
-            .cornerRadius(20)
-            
+
             HStack {
                 Image(systemName: "heart.fill")
-                Text("\(deal.likes.count)").bold()
+                Text("\(deal.likes?.count ?? 0)").bold()
                 Spacer()
                 Text("$\(deal.price)").font(.system(size: 30)).bold()
                     .foregroundColor(Color("lightPink"))

@@ -24,21 +24,22 @@ struct DealGridView: View {
                 ForEach(seeMore == true ? deals : Array(deals.prefix(4))) { deal in
                     NavigationLink(value: deal) {
                         VStack {
-                            AsyncImage(url: URL(string: deal.product.image)) {image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                                    .aspectRatio(1, contentMode: .fill)
-                                    .clipped() //A
-                            } placeholder: {
-                                ZStack {
-                                    ProgressView()
+                            if let imageLink = deal.product?.image {
+                                AsyncImage(url: URL(string: imageLink)) {image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                        .aspectRatio(1, contentMode: .fill)
+                                        .clipped() //A
+                                } placeholder: {
+                                    ZStack {
+                                        ProgressView()
+                                    }
+                                    .frame(width: 175, height: 180)
+                                    .cornerRadius(20)
                                 }
-                                .frame(width: 175, height: 180)
-                                .cornerRadius(20)
                             }
-                            
                             Text(deal.title)
                                 .lineLimit(1)
                                 .bold()

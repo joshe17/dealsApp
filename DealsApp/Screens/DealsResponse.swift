@@ -25,21 +25,17 @@ struct Deals: Codable {
 
 
 struct Deal: Codable, Identifiable, Hashable {
-    static func == (lhs: Deal, rhs: Deal) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
     let id: String
     let title: String
     let url: String
     let price: Int
-    let description: String
-    let product: Product
+    let description: String?
+    let product: Product?
     let createdAt: String
     let updatedAt: String
-    let likes: [ProductLike]
-    let dislikes: [ProductDislike]
-    let comments: [Comment]
+    let likes: [ProductLike]?
+    let dislikes: [ProductDislike]?
+    let comments: [Comment]?
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -55,15 +51,29 @@ struct Deal: Codable, Identifiable, Hashable {
         case comments = "comments"
     }
     
-//    func formatCreatedDate() -> String {
-//        let date =  Date(timeIntervalSince1970: Double(createdAt) ?? 0)
-//        let formatted = date.formatted(date: .abbreviated, time: .omitted)
-//        return formatted
-//    }
+    static func == (lhs: Deal, rhs: Deal) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    
     func formatUpdatedDate() -> String {
-        let date =  Date(timeIntervalSinceReferenceDate: Double(product.updatedAt) ?? 0)
+        let date =  Date(timeIntervalSinceReferenceDate: Double(product?.updatedAt ?? "") ?? 0)
         let formatted = date.formatted(date: .abbreviated, time: .omitted)
         return formatted
+    }
+    
+    func getRelatedDeals() -> [Deal] {
+        var res: [Deal] = []
+        if let allLikes = likes {
+            for l in allLikes {
+                if let userLikes = l.user.likes {
+                    for abbreviatedDeal in userLikes {
+                        res.append(abbreviatedDeal.deal)
+                    }
+                }
+            }
+        }
+        return res
     }
 }
 
@@ -94,9 +104,9 @@ struct ProductLike: Codable, Identifiable, Hashable {
 }
 
 struct User: Codable, Identifiable, Hashable {
-    let id: String
+    let id: String?
     let name: String
-    let likes: [UserLike]
+    let likes: [UserLike]?
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -107,7 +117,7 @@ struct User: Codable, Identifiable, Hashable {
 
 struct UserLike: Codable, Identifiable, Hashable {
     let id: String
-    let deal: AbbreviatedDeal
+    let deal: Deal
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -115,27 +125,9 @@ struct UserLike: Codable, Identifiable, Hashable {
     }
 }
 
-struct AbbreviatedDeal: Codable, Identifiable, Hashable {
-    let id: String
-    let title: String
-    let url: String
-    let price: Int
-    let createdAt: String
-    let updatedAt: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case title = "title"
-        case url = "url"
-        case price = "price"
-        case createdAt = "createdAt"
-        case updatedAt = "updatedAt"
-    }
-}
-
 struct ProductDislike: Codable, Identifiable, Hashable {
     let id: String
-    let user: DislikeUser
+    let user: User
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -143,19 +135,12 @@ struct ProductDislike: Codable, Identifiable, Hashable {
     }
 }
 
-struct DislikeUser: Codable, Hashable {
-    let name: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case name = "name"
-    }
-}
 
 struct Comment: Codable, Identifiable, Hashable {
     let id: String
     let createdAt: String
     let text: String
-    let user: CommentUser
+    let user: User
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -165,12 +150,3 @@ struct Comment: Codable, Identifiable, Hashable {
     }
 }
 
-struct CommentUser: Codable, Identifiable, Hashable {
-    let id: String
-    let name: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case name = "name"
-    }
-}

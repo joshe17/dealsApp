@@ -12,13 +12,16 @@ struct DealDetailHeroView: View {
 
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: deal.product.image)) {image in
-                image
-                    .resizable()
-                    .scaledToFit()
-            } placeholder: {
-                ProgressView()
+            if let imageLink = deal.product?.image {
+                AsyncImage(url: URL(string: imageLink)) {image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
             }
+            
             Link(destination: URL(string: deal.url)!) {
                 Text(deal.title)
                     .font(.largeTitle).bold()
@@ -27,19 +30,19 @@ struct DealDetailHeroView: View {
             .padding()
                 
             HStack {
-                NavigationLink(destination: DealsLikesView(likes: deal.likes)){
+                NavigationLink(destination: DealsLikesView(likes: deal.likes ?? [])){
                     Image(systemName: "heart.fill")
                         .resizable()
                         .frame(width: 25, height: 25)
-                    Text("\(deal.likes.count)").bold()
+                    Text("\(deal.likes?.count ?? 0)").bold()
                 }
                 
-                NavigationLink(destination: DealsDislikesView(dislikes: deal.dislikes)) {
+                NavigationLink(destination: DealsDislikesView(dislikes: deal.dislikes ?? [])) {
                     Image(systemName: "hand.thumbsdown.fill")
                         .resizable()
                         .frame(width: 25, height: 25)
                         .padding(.leading)
-                    Text("\(deal.dislikes.count)").bold()
+                    Text("\(deal.dislikes?.count ?? 0)").bold()
                 }
  
                 Spacer()

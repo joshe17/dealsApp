@@ -15,7 +15,7 @@ struct DealDetailDescriptionView: View {
         VStack {
             HStack {
                 VStack {
-                    Text("Availability: \(deal.product.availability)")
+                    Text("Availability: \(deal.product?.availability ?? "n/a")")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .bold()
                         .foregroundColor(Color("lightPink"))
@@ -29,7 +29,7 @@ struct DealDetailDescriptionView: View {
             .padding(.bottom)
             
             VStack {
-                Text(deal.product.description)
+                Text(deal.product?.description ?? "no description available")
                     .lineLimit(showMoreDescription ? nil : 6)
                     .padding()
                 Button {

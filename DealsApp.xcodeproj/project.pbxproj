@@ -24,6 +24,7 @@
 		F39ED83C2A57A8E300AF4754 /* DealDetailHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39ED83B2A57A8E300AF4754 /* DealDetailHeroView.swift */; };
 		F39ED83E2A57A92900AF4754 /* DealDetailDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39ED83D2A57A92900AF4754 /* DealDetailDescriptionView.swift */; };
 		F39ED8412A57BA0600AF4754 /* DealDetailsCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39ED8402A57BA0600AF4754 /* DealDetailsCommentsView.swift */; };
+		F3A844F72A5CB6F000B568E0 /* DealDetailRelatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A844F62A5CB6F000B568E0 /* DealDetailRelatedView.swift */; };
 		F3B592DB2A54C8C7003058BE /* FeaturedDealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B592DA2A54C8C7003058BE /* FeaturedDealView.swift */; };
 		F3EAB4CA2A58BCF3000B2E54 /* DealsLikesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB4C92A58BCF3000B2E54 /* DealsLikesView.swift */; };
 		F3EAB4CC2A58CB84000B2E54 /* DealsDislikesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EAB4CB2A58CB84000B2E54 /* DealsDislikesView.swift */; };
@@ -67,6 +68,7 @@
 		F39ED83B2A57A8E300AF4754 /* DealDetailHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealDetailHeroView.swift; sourceTree = "<group>"; };
 		F39ED83D2A57A92900AF4754 /* DealDetailDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealDetailDescriptionView.swift; sourceTree = "<group>"; };
 		F39ED8402A57BA0600AF4754 /* DealDetailsCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealDetailsCommentsView.swift; sourceTree = "<group>"; };
+		F3A844F62A5CB6F000B568E0 /* DealDetailRelatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealDetailRelatedView.swift; sourceTree = "<group>"; };
 		F3B592DA2A54C8C7003058BE /* FeaturedDealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedDealView.swift; sourceTree = "<group>"; };
 		F3EAB4C92A58BCF3000B2E54 /* DealsLikesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsLikesView.swift; sourceTree = "<group>"; };
 		F3EAB4CB2A58CB84000B2E54 /* DealsDislikesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsDislikesView.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				F39ED83D2A57A92900AF4754 /* DealDetailDescriptionView.swift */,
 				F39ED83B2A57A8E300AF4754 /* DealDetailHeroView.swift */,
 				F39ED8402A57BA0600AF4754 /* DealDetailsCommentsView.swift */,
+				F3A844F62A5CB6F000B568E0 /* DealDetailRelatedView.swift */,
 			);
 			path = DealsDetailPage;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				7C2AFD602A53052000BA663D /* DealsService.swift in Sources */,
 				7C2AFD622A53056700BA663D /* HomeViewModel.swift in Sources */,
 				7C2AFD2F2A53043500BA663D /* HomeView.swift in Sources */,
+				F3A844F72A5CB6F000B568E0 /* DealDetailRelatedView.swift in Sources */,
 				F31117172A567DED003115EF /* DealGridView.swift in Sources */,
 				F39ED8412A57BA0600AF4754 /* DealDetailsCommentsView.swift in Sources */,
 				F39ED83C2A57A8E300AF4754 /* DealDetailHeroView.swift in Sources */,
