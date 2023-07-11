@@ -62,13 +62,17 @@ struct Deal: Codable, Identifiable, Hashable {
         return formatted
     }
     
-    func getRelatedDeals() -> [Deal] {
+    func getRelatedDeals(allDeals: [Deal]) -> [Deal] {
         var res: [Deal] = []
         if let allLikes = likes {
             for l in allLikes {
                 if let userLikes = l.user.likes {
                     for abbreviatedDeal in userLikes {
-                        res.append(abbreviatedDeal.deal)
+                        if abbreviatedDeal.deal.id != id && res.contains(abbreviatedDeal.deal) == false {
+                            if let index = allDeals.firstIndex(of: abbreviatedDeal.deal) {
+                                res.append(allDeals[index])
+                            }
+                        }
                     }
                 }
             }

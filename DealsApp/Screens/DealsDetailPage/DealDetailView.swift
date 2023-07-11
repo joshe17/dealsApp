@@ -11,6 +11,7 @@ import SwiftUI
 
 struct DealDetailView: View {
     let deal : Deal
+    let allDeals: [Deal]
     @Binding var path: NavigationPath
     
     var body: some View {
@@ -33,6 +34,10 @@ struct DealDetailView: View {
                 if deal.comments?.count ?? 0 > 0 {
                     DealDetailsCommentsView(comments: deal.comments ?? [])
                 }
+                
+                if deal.getRelatedDeals(allDeals: allDeals).count > 0 {
+                    DealDetailRelatedView(deal: deal, allDeals: allDeals)
+                }
             }
         }
         .background(Color("darkPurple"))
@@ -43,8 +48,12 @@ struct DealDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Deals").font(.title).bold()
-                    .foregroundColor(Color("lightPink"))
+                Button {
+                    path.removeLast(path.count)
+                } label: {
+                    Text("Deals").font(.title).bold()
+                        .foregroundColor(Color("lightPink"))
+                }
             }
         }
     }

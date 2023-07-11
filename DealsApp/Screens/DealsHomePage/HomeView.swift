@@ -52,8 +52,12 @@ struct HomeView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .principal) {
-                            Text("Deals").font(.title).bold()
-                                .foregroundColor(Color("lightPink"))
+                            Button {
+                                path.removeLast(path.count)
+                            } label: {
+                                Text("Deals").font(.title).bold()
+                                    .foregroundColor(Color("lightPink"))
+                            }
                         }
                     }
 
@@ -62,7 +66,7 @@ struct HomeView: View {
             .background(Color("darkPurple"))
             .foregroundColor(.white)
             .navigationDestination(for: Deal.self) { deal in
-                DealDetailView(deal: deal, path: $path)
+                DealDetailView(deal: deal, allDeals: viewModel.deals, path: $path)
             }
         }
 
